@@ -25,10 +25,10 @@ $(function(){
             return {
                 timeStart: "9:00am",
                 timeEnd: "5:00pm",
-                projectName: "Metagame",
+                projectName: "",
                 projectVersion: "1.0",
                 projectPlatform: "iPhone",
-                activityName: "Working"
+                activityName: ""
             };
         }
 
