@@ -1,0 +1,89 @@
+$(function(){
+    //Models
+    var Timesheet = Backbone.Model.extend({
+        initialize: function(){
+            this.days = new SheetDays;
+        }
+    });
+
+    window.SheetDay =  Backbone.Model.extend({
+        initialize: function() {
+            this.activities = new SheetActivities;
+        }
+    });
+
+
+    window.SheetDays = Backbone.Collection.extend({
+        model:SheetDay
+    });
+
+   window.SheetActivity = Backbone.Model.extend({
+        defaults: function(){
+            return {
+                timeStart: "9:00am",
+                timeEnd: "5:00pm",
+                projectName: "",
+                projectVersion: "1.0",
+                projectPlatform: "iPhone",
+                activityName: ""
+            };
+        }
+
+    });
+
+    window.SheetActivities = Backbone.Collection.extend({
+        model: SheetActivity
+    });
+
+    
+
+    //Views//
+    
+
+    window.DayView = Backbone.View.extend({
+        initialize: function() {
+            //this.model.bind('change', this.updateView, this);
+        },
+        render: function() {
+            $('#timesheet').append(this.el);
+            $(this.el).html('<div class="day panel">'
+                           +'<span id="delDay" class="nice small red button round">Delete</span>'
+                           +'<div style="padding:10px"/>'
+                           +'</div>')
+                      .css({});
+        }
+    });
+
+    window.TimesheetView = Backbone.View.extend({
+        id: 'timesheet',
+        views: {},
+        initialize: function() {
+            this.collection.bind('add', this.added, this);
+            this.collection.bind('remove', this.removed, this);
+        },
+        render: function() {
+            return this;
+        },
+        added:function(m) {
+            this.views[m.cid] = new DayView({
+                model: m,
+                id:'view_' + m.cid 
+            }).render(); 
+        },
+        removed: function(m) {
+            this.views[m.cid].remove();
+            delete this.views[m.cid];
+        }
+    });
+
+    window.aTimesheet = new SheetDays();
+    window.timesheetView = new TimesheetView({collection: aTimesheet});
+    timesheetView.render();
+
+    $('#addDay').click(function(){
+        aTimesheet.add(new SheetDay());
+    });
+
+   
+});
+
