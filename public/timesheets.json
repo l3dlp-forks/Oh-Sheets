@@ -1,0 +1,22 @@
+[{
+    "employee": "Brian Oley",
+    "weekof": "02/04/2012",
+    "activities":[{
+        "day": "Monday",
+        "start":" 10:00am",
+        "end":" 6:00pm",
+        "project": "Updraft Jack",
+        "platform": "iPhone",
+        "version": "1.0",
+        "activity": "programming"
+    },
+    {
+        "day": "Tuesday",
+        "start": "9:00am",
+        "end": "5:00pm",
+        "project": "Battle Harvest",
+        "platform": "OSX",
+        "version": "1.0",
+        "activity": "programming"
+    }]
+}]
